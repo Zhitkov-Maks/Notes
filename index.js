@@ -7,7 +7,6 @@ require("dotenv").config();
 const express = require("express");
 const nunjucks = require("nunjucks");
 const cookieParser = require("cookie-parser");
-const morgan = require("morgan");
 const users = require("./crud/users");
 const userRout = require('./routes/auth');
 const notesRout = require("./routes/notes");
@@ -82,7 +81,6 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
-app.use(morgan("':method :url :status :res[content-length] - :response-time ms'"));
 
 
 // Роут для запроса аутентификации у гугла
