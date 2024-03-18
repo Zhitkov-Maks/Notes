@@ -66,13 +66,15 @@ router.get("/notes/:id", users.auth(), async (req, resp) => {
   resp.json(note);
 })
 
-// Для создания pdf
+// Роут для загрузки pdf файла
 router.get("/notes/:id/download", users.auth(), async (req, resp) => {
   if (!req.user) {
     return resp.redirect("/");
   }
   let note = await notes.getNotesById(req.params.id, req.user);
   note = await util.convertNotes(note);
+
+  // Отправляем на генерацию html в buffer
   const buffer = await util.generatePdf(note.html);
   resp.setHeader('Content-disposition', 'attachment; filename=' + nanoid() + ".pdf");
   resp.setHeader('Content-type', 'application/pdf')

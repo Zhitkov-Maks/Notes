@@ -59,8 +59,7 @@ const createUserFromNetwork = async (username, password, provider) => {
 }
 
 /*
-Создаем pdf документ, пока не понимаю как его отправить в браузер
-в данном варианте мы не сохраняем в файл, а получаем buffer.
+Преобразуем html код в buffer, и возвращаем buffer
 */
 const generatePdf = async (htmlCode) => {
   const browser = await puppeteer.launch();
